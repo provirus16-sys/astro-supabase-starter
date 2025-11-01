@@ -1,71 +1,206 @@
 ---
-import { getEntry } from "astro:content";
-import Alert from "../components/Alert.astro";
-import Guide from "../components/Guide.astro";
 import Layout from "../components/Layout.astro";
-import TableRow from "../components/TableRow.astro";
-import { supabase } from "../utils/database";
 
-export const prerender = false;
-
-let frameworks;
-let frameworksError;
-
-// Fetch frameworks data from Supabase if connection is set up
-if (supabase) {
-  const { data, error } = await supabase
-    .from("frameworks")
-    .select("*")
-    .order("likes", { ascending: false });
-  frameworks = data;
-  frameworksError = error;
-}
-
-// Get guides
-const connectGuide = await getEntry("guides", "guide-connect-supabase");
-const fetchDataGuide = await getEntry("guides", "guide-fetch-data");
+export const prerender = true;
 ---
 
-<Layout title="Web Frameworks">
-  {
-    supabase ? (
-      frameworks ? (
-        <>
-          <h1 class="mb-8 text-4xl font-bold">
-            Vote for Your Favorite Web Framework
-          </h1>
-          <table class="w-full text-left">
-            <thead>
-              <tr class="font-mono text-base border-t border-b">
-                <th>Name</th>
-                <th>Logo</th>
-                <th>Likes</th>
-              </tr>
-            </thead>
-            <tbody>
-              {frameworks?.map((framework) => (
-                <TableRow framework={framework} />
-              ))}
-            </tbody>
-          </table>
-        </>
-      ) : (
-        <>
-          {frameworksError && (
-            <Alert
-              title={frameworksError.code}
-              text={frameworksError.message}
-              variant="error"
-            />
-          )}
-          {fetchDataGuide && <Guide guide={fetchDataGuide} />}
-        </>
-      )
-    ) : (
-      <>
-        <Alert title="Finish setting up your new site" text="Before your website is ready, you must complete the steps from the guide below to create, populate, and connect your Supabase database."/>
-        {connectGuide && <Guide guide={connectGuide} />}
-      </>
-    )
-  }
+<Layout title="CYMON Private Institute of Mathematics and Economics">
+  <div class="prose prose-invert prose-lg max-w-none">
+    <div class="text-center mb-12">
+      <h1 class="text-5xl font-bold mb-4 text-green-400">
+        Welcome to CYMON Private Institute of Mathematics and Economics
+      </h1>
+    </div>
+
+    <div class="mb-12 p-8 bg-neutral-900 rounded-lg">
+      <div class="flex items-center mb-6">
+        <img 
+          src="/images/mathematics.svg" 
+          alt="Mathematics Excellence" 
+          class="w-full h-64 object-cover rounded-lg"
+        />
+      </div>
+      
+      <p class="text-lg leading-relaxed mb-4">
+        I am delighted that you are considering CYMON Private Institute of Mathematics and Economics for your education. Your decision to study marks the beginning of an ambitious and rewarding journey - one defined by intellectual growth, personal development, and new opportunities. It is a journey we would be honoured to share with you.
+      </p>
+
+      <p class="text-lg leading-relaxed mb-4">
+        In an ever-evolving and competitive global landscape, success demands not only exceptional academic achievement but also resilience, creativity, and adaptability. At CYMON, we are dedicated to nurturing these qualities, ensuring our students graduate as forward-thinking, confident individuals ready to shape the future of their chosen fields.
+      </p>
+
+      <p class="text-lg leading-relaxed mb-4">
+        Yet, we believe that true education extends beyond the classroom. It is about cultivating curiosity, integrity, and a sense of purpose - building not just a career, but a meaningful life that contributes positively to the wider community.
+      </p>
+
+      <p class="text-lg leading-relaxed mb-4">
+        Our aim is for every CYMON student to leave us as a scholar, a leader, and a global citizen, equipped with the knowledge, skills, and mindset to thrive in the modern world. I hope that, as you explore this prospectus, you will come to understand why we take such immense pride in our institute, our students, and the transformative education we provide.
+      </p>
+
+      <p class="text-lg leading-relaxed mb-4">
+        Our curriculum is unapologetically academic, complemented by a carefully designed personal development programme that broadens horizons and nurtures character.
+      </p>
+
+      <p class="text-lg leading-relaxed mb-6 font-semibold">
+        Studying at CYMON is not just an academic decision — it is a life decision.
+      </p>
+
+      <p class="text-lg leading-relaxed mb-6">
+        We recognise the trust you place in us and the responsibility we hold in shaping your future. At CYMON, we take great pride in supporting every student in the pursuit of their dreams and aspirations, while ensuring they leave us not only academically accomplished, but also well-rounded, confident, and highly employable.
+      </p>
+
+      <div class="border-t border-neutral-700 pt-6">
+        <p class="font-bold text-xl">Panos Tofarides (Tofas)</p>
+        <p class="text-green-400 mb-2">Founder of CYMON Private Institute of Mathematics and Economics</p>
+        <p>
+          <a href="mailto:ptofarides@cymon.institute" class="text-green-400 hover:text-green-300">
+            ptofarides@cymon.institute
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <div class="mb-12">
+      <h2 class="text-4xl font-bold mb-6 text-green-400">Academic Institution Profile</h2>
+      
+      <div class="mb-8">
+        <h3 class="text-3xl font-bold mb-4">About the Institute</h3>
+        <p class="text-lg leading-relaxed">
+          The Cymon Private Institute of Mathematics and Economics is a distinguished private academic institution offering tuition in International A Level Mathematics, Further Mathematics, and Economics. Our primary focus is the academic preparation of students aspiring to secure admission to top-tier universities in the United Kingdom, Europe and the United States.
+        </p>
+      </div>
+
+      <div class="mb-8">
+        <img 
+          src="/images/education.svg" 
+          alt="Educational Excellence" 
+          class="w-full h-64 object-cover rounded-lg mb-6"
+        />
+        
+        <h3 class="text-3xl font-bold mb-4">Educational Philosophy</h3>
+        <p class="text-lg leading-relaxed mb-4">
+          Established in 2013, the Institute has developed an innovative and aptitude-based approach to teaching, designed to nurture each student's intellectual potential without being limited by age restrictions. Many students commence their studies with us at the age of 14, and several have successfully gained admission to leading universities by the age of 16.
+        </p>
+        <p class="text-lg leading-relaxed">
+          Our A Level curriculum enables students to cultivate exceptional problem-solving abilities and a strong mathematical foundation, preparing them for the demands of higher education.
+        </p>
+      </div>
+
+      <div class="mb-8 p-6 bg-neutral-900 rounded-lg">
+        <h3 class="text-3xl font-bold mb-4">Academic Excellence and Achievements</h3>
+        <p class="text-lg leading-relaxed mb-4">
+          Since its founding, the Cymon Private Institute of Mathematics and Economics has maintained a record of outstanding academic success:
+        </p>
+        <ul class="text-lg leading-relaxed list-disc list-inside space-y-2 mb-4">
+          <li>Over 30 World and European Highest Marks in IAL Mathematics and Further Mathematics.</li>
+          <li>9 World and European Highest Marks in IAL Economics.</li>
+          <li>The only academic institution in Cyprus whose two students have achieved the highest mark in the world in IAL Further Mathematics since the introduction of the qualification in 2014.</li>
+        </ul>
+      </div>
+
+      <div class="mb-8">
+        <h3 class="text-3xl font-bold mb-4">Assessment and Results</h3>
+        <p class="text-lg leading-relaxed mb-4">
+          Predicted results are based on each student's performance in external IAS examinations combined with comprehensive internal assessments conducted throughout the academic year and prior to completion of the IAL.
+        </p>
+        <p class="text-lg leading-relaxed mb-2">
+          Our academic record to date demonstrates:
+        </p>
+        <ul class="text-lg leading-relaxed list-disc list-inside space-y-2 mb-4">
+          <li>IAL Mathematics – 70% of students achieved grade A*, and 30% achieved grade A.</li>
+          <li>IAL Economics – 30% of students achieved grade A*, and 50% achieved grade A.</li>
+        </ul>
+      </div>
+
+      <div class="mb-8">
+        <h3 class="text-3xl font-bold mb-4">University Placements</h3>
+        <p class="text-lg leading-relaxed">
+          Owing to their exceptional results, our students consistently secure places at prestigious universities in the United Kingdom, Europe, and the United States, continuing the Institute's tradition of academic excellence and international success.
+        </p>
+      </div>
+    </div>
+
+    <div class="mb-12">
+      <h2 class="text-4xl font-bold mb-6 text-green-400">Careers</h2>
+      
+      <div class="mb-8">
+        <img 
+          src="/images/careers.svg" 
+          alt="Career Opportunities" 
+          class="w-full h-64 object-cover rounded-lg mb-6"
+        />
+        
+        <p class="text-lg leading-relaxed mb-4">
+          Many people assume that those who excel in mathematics become accountants, teachers, or academics. The reality is very different: mathematically trained minds thrive in a huge variety of industries and roles.
+        </p>
+        <p class="text-lg leading-relaxed mb-4">
+          Mathematical thinking is more than just working with numbers. It is a creative, analytical approach that helps you uncover what truly matters in any situation. Playful yet powerful, this skill set is highly prized by employers across sectors.
+        </p>
+      </div>
+
+      <div class="mb-8 p-6 bg-neutral-900 rounded-lg">
+        <h3 class="text-3xl font-bold mb-4">Opportunities in STEM and Beyond</h3>
+        <p class="text-lg leading-relaxed mb-4">
+          Careers in STEM fields are not only well-paid but also challenging and rewarding. However, exam success alone is not enough. To flourish in today's dynamic professional world, you also need to develop:
+        </p>
+        <ul class="text-lg leading-relaxed list-disc list-inside space-y-2 mb-4">
+          <li>Confidence in communication</li>
+          <li>Collaboration and teamwork skills</li>
+          <li>Critical and creative problem-solving abilities</li>
+        </ul>
+        <p class="text-lg leading-relaxed">
+          Mathematical expertise opens doors—but the skills to navigate them are equally important.
+        </p>
+      </div>
+
+      <div class="mb-8">
+        <h3 class="text-3xl font-bold mb-4">How We Prepare Our Students</h3>
+        <p class="text-lg leading-relaxed mb-4">
+          At the Cymon Private Institute, we go beyond academic excellence. Our students are supported through a structured careers programme designed to develop the skills required to succeed in any industry.
+        </p>
+        <p class="text-lg leading-relaxed">
+          Through these programmes, students leave the Institute not only with outstanding mathematical knowledge but also with the versatility and confidence to excel in any career they choose.
+        </p>
+      </div>
+
+      <div class="mb-8">
+        <h3 class="text-3xl font-bold mb-4">Internship Opportunities</h3>
+        <p class="text-lg leading-relaxed mb-4">
+          Our students are regularly informed about a wide range of internship opportunities through guidance sessions. These competitive placements typically take place during the summer holidays, after students have completed their studies at the Institute. They provide an excellent way to gain practical work experience and insight into different industries.
+        </p>
+        <p class="text-lg leading-relaxed">
+          These opportunities allow students to develop professional skills, network with industry leaders, and gain a head start in their careers.
+        </p>
+      </div>
+    </div>
+
+    <div class="mb-12 p-8 bg-gradient-to-r from-green-900 to-neutral-900 rounded-lg">
+      <h2 class="text-4xl font-bold mb-6 text-green-400">Virtual Tours</h2>
+      <p class="text-lg leading-relaxed mb-6">
+        Explore our facilities with our interactive 3D virtual tours:
+      </p>
+      <div class="space-y-4">
+        <div>
+          <a 
+            href="https://my.matterport.com/show/?m=9uF2G5rJTz6" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors"
+          >
+            Virtual Tour - Building 1
+          </a>
+        </div>
+        <div>
+          <a 
+            href="https://my.matterport.com/show/?m=ASvMM8jFbQr" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors"
+          >
+            Virtual Tour - Building 2
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </Layout>
